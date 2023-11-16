@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Brain Game</title>
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <ul>
+                <li class="nav-item"><a href="" class="nav-items">Home</a></li>
+                <li class="nav-item"><a href="" class="nav-items">About Us</a></li>
+                <li class="nav-item"><a href="" class="nav-items">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2 class="game-title">Brain Game</h2>
+        <div class="game-container">
+         
+            <div class="screen1" id="screen1">
+                <button class="start-game" id="btn-start">Start Game!</button>
+            </div>
+
+            <div class="screen2 hide">
+                <h2 class="screen2-title">Players</h2>
+                <form class="form-container">
+                    <label for="playerName" class="playerLabel">Enter your name</label>
+                    <input type="text" id="playerName" name="playerName" placeholder="..." class="name">
+                    <button  class="join-button"> JOIN </button>
+                </form>
+                <p class="output"></p>
+            </div>
+        </div>
+    </main>
+ <script src="./script/script.js"></script>   
+</body>
+</html>

@@ -1,0 +1,246 @@
+
+body{
+    background-image: url(../images/bg2.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+/* NAB BAR */
+.nav-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.nav-item{
+    list-style-type: none;
+}
+
+.nav-items{
+    text-decoration-line: none;
+}
+
+/* MAIN */
+
+main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* title */
+
+.game-title {
+    font-size: 2.5rem; /* Larger font size for prominence */
+    color: #4CAF50; /* A bright, contrasting color */
+    text-shadow: 3px 3px 6px rgba(50, 50, 50, 0.7); /* Deeper shadow for a pop-out effect */
+    font-family: 'Verdana', sans-serif; /* A clean, readable font */
+    letter-spacing: 0.1em; /* Increase letter spacing for clarity */
+    text-transform: uppercase; /* Uppercase for a bold look */
+    border: 2px solid #4CAF50; /* Add a border with the same color as the text */
+    padding: 10px; /* Add some padding around the text */
+    border-radius: 10px; /* Rounded corners for the border */
+    background-color: rgba(0, 0, 0, 0.2); /* Slight dark background for contrast */
+    box-shadow: 0px 0px 15px 5px #4CAF50; /* Outer glow effect */
+}
+
+@media (max-width: 600px) {
+    .game-title {
+        font-size: 2rem; /* Smaller font size for mobile responsiveness */
+    }
+}
+
+
+
+.game-container{
+    height: 35rem;
+    background-color: rgba(47, 47, 59, 0.171);
+    width: 90%;
+   align-self: center;
+   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);  /* Shadow for floating effect */
+   border-radius: 15px;                         /* Smooth rounded corners */
+   padding: 20px;                               /* Inner space */
+   margin-top: 30px;   
+}
+/* Neon blue style enhancements for the player label and input field */
+.playerLabel,
+.name {
+    font-size: 1.2rem; /* Consistent font size for label and input */
+    color: #00BFFF; /* Neon blue for a vibrant effect */
+    text-shadow: 0 0 8px #00BFFF, 0 0 20px #00BFFF, 0 0 30px #00BFFF; /* Layered blue glow for depth */
+    font-family: 'Verdana', sans-serif; /* Sans-serif font for a modern look */
+    letter-spacing: 0.05em; /* Spacing to emulate neon sign typography */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.playerLabel {
+    padding: 5px; /* Padding for aesthetic spacing */
+    border-radius: 5px; /* Soft rounded corners */
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black for contrast */
+    border: 1px solid #00BFFF; /* Neon-style border to match the text glow */
+}
+
+.playerLabel:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Darker background on hover for better readability */
+    cursor: pointer; /* Indicates an interactive element */
+}
+
+.name {
+    border: 2px solid #00BFFF; /* Matching neon blue border */
+    background-color: #000; /* Solid black background for contrast */
+    padding: 10px; /* Ample padding for a touch-friendly interface */
+    border-radius: 5px; /* Rounded corners to match the label style */
+    box-shadow: none; /* No box-shadow for a cleaner look */
+    color: #FFF; /* White text for high contrast and legibility */
+}
+
+.name::placeholder {
+    color: #FFF; /* White placeholder text that complements the neon effect */
+    opacity: 0.5; /* Slightly transparent for a placeholder effect */
+}
+
+.name:focus {
+    outline: none; /* Removes default outline to maintain the neon aesthetic */
+    box-shadow: 0 0 12px #00BFFF, 0 0 25px #00BFFF; /* Enhanced glowing effect to indicate focus */
+}
+
+@media (max-width: 600px) {
+    .playerLabel,
+    .name {
+        font-size: 1rem; /* Slightly smaller font size for mobile compatibility */
+    }
+}
+
+
+
+
+
+
+
+
+/* screen 1 */
+.screen1{
+display: flex;
+justify-content: center;
+}
+
+/* screen 2 */
+.hide {
+    display: none;
+}
+.show{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.screen2-title {
+    text-align: center;
+    font-size: 2.5rem; /* Increase font size for prominence */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for depth */
+    font-family: 'Arial', sans-serif; /* Use a modern font */
+    letter-spacing: 0.05em; /* Space out the letters a bit */
+    text-transform: uppercase; /* Make the text uppercase for impact */
+    animation: glow 1.5s ease-in-out infinite alternate; /* Add a glowing animation */
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px white, 0 0 20px white;
+    }
+    to {
+        text-shadow: 0 0 20px cyan, 0 0 30px cyan;
+    }
+}
+
+.output{
+    color: white;
+    font-size: 2rem;
+}
+
+
+.start-game {
+    align-self: center;
+    padding: 20px 50px;
+    font-size: 24px;
+    border: none;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.1); /* Translucent black background */
+    color: #fff; /* White text */
+    transition: all 0.4s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 0 5px rgba(173, 216, 230, 1), 0 0 15px rgba(173, 216, 230, 1);
+    animation: pulse 1.5s infinite alternate;
+    border: 3px solid rgba(173, 216, 230, 0.5);
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 5px #add8e6, 0 0 10px #add8e6, 0 0 15px #e066ff, 0 0 20px #e066ff, 0 0 25px #e066ff, 0 0 30px #e066ff, 0 0 35px #e066ff;
+        text-shadow: 0 0 5px #add8e6, 0 0 10px #add8e6, 0 0 15px #e066ff, 0 0 20px #e066ff, 0 0 25px #e066ff, 0 0 30px #e066ff, 0 0 35px #e066ff;
+    }
+    to {
+        box-shadow: 0 0 10px #add8e6, 0 0 20px #add8e6, 0 0 30px #e066ff, 0 0 40px #e066ff, 0 0 50px #e066ff, 0 0 60px #e066ff, 0 0 70px #e066ff;
+        text-shadow: 0 0 10px #add8e6, 0 0 20px #add8e6, 0 0 30px #e066ff, 0 0 40px #e066ff, 0 0 50px #e066ff, 0 0 60px #e066ff, 0 0 70px #e066ff;
+    }
+}
+
+.start-game:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    animation: none;
+    box-shadow: 0 0 10px #add8e6, 0 0 20px #add8e6, 0 0 30px #e066ff, 0 0 40px #e066ff, 0 0 50px #e066ff, 0 0 60px #e066ff, 0 0 70px #e066ff;
+    text-shadow: 0 0 10px #add8e6, 0 0 20px #add8e6, 0 0 30px #e066ff, 0 0 40px #e066ff, 0 0 50px #e066ff, 0 0 60px #e066ff, 0 0 70px #e066ff;
+}
+
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Neon style join button */
+.join-button {
+    font-size: 1.5rem; /* Larger font size for emphasis */
+    color: #00BFFF; /* Neon blue text color */
+    text-shadow: 0 0 5px #00BFFF, 0 0 10px #00BFFF, 0 0 15px #00BFFF; /* Blue text glow */
+    font-family: 'Verdana', sans-serif; /* Consistent font family */
+    padding: 15px 30px; /* Ample padding for a button */
+    border-radius: 10px; /* Slightly larger border-radius for a pill-like shape */
+    border: 2px solid #00BFFF; /* Solid neon blue border */
+    background: transparent; /* Transparent background to start with */
+    outline: none; /* No outline for a clean look */
+    cursor: pointer; /* Cursor indicates button */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Smooth transition for hover effects */
+    text-transform: uppercase; /* Uppercase text for stylistic preference */
+    letter-spacing: 0.1em; /* More letter-spacing for a spaced-out neon sign look */
+}
+
+.join-button:hover, .join-button:focus {
+    color: #FFFFFF; /* White text on hover/focus for contrast */
+    background-color: #00BFFF; /* Neon blue background on hover/focus */
+    text-shadow: 0 0 10px #FFFFFF, 0 0 20px #00BFFF, 0 0 30px #00BFFF; /* White and blue glow for depth */
+    box-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF; /* Outer blue glow */
+}
+
+.join-button:active {
+    transform: translateY(2px); /* Slight push effect on click */
+    box-shadow: 0 0 5px #00BFFF, 0 0 10px #00BFFF; /* Less outer glow for a "pressed" effect */
+}
+
+/* Smaller devices */
+@media (max-width: 600px) {
+    .join-button {
+        font-size: 1rem; /* Smaller font size for device compatibility */
+        padding: 10px 20px; /* Smaller padding for smaller devices */
+    }
+}
