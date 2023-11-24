@@ -7,18 +7,13 @@
     <title>Brain Game</title>
 </head>
 <body>
-    <header>
-        <nav class="nav-container">
-            <ul>
-                <li class="nav-item"><a href="" class="nav-items">Home</a></li>
-                <li class="nav-item"><a href="" class="nav-items">About Us</a></li>
-                <li class="nav-item"><a href="" class="nav-items">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
+  
     
     <main>
+        <div class="title-wrapper">
         <h2 class="game-title">Brain Game</h2>
+        <button class="title-btn hide">NEXT</button>
+        </div>
         <div class="game-container">
          
             <div class="screen1" id="screen1">
@@ -30,12 +25,29 @@
                 <form class="form-container">
                     <label for="playerName" class="playerLabel">Enter your name</label>
                     <input type="text" id="playerName" name="playerName" placeholder="..." class="name">
-                    <button  class="join-button"> JOIN </button>
+                    <button  class="join-button" > JOIN </button> 
                 </form>
-                <p class="output"></p>
+                <div class="output"></div>
             </div>
+
+            <div class="screen3 hide">
+                <h2 class="screen2-title">DIFFICULTY</h2>
+                <div class="difficulty-box">
+                    <button class="btn-easy">EASY</button>
+                    <button class="btn-hard">HARD</button>
+                </div>
+            </div>
+
+            <div class="screen4 hide">
+                <h2 class="screen4-title">Match</h2>
+                <div class="flag-container">
+                    
+                </div>
+            </div>
+
         </div>
     </main>
+    <script src="data/countries_flags.js"></script>
  <script src="./script/script.js"></script>   
 </body>
 </html>

@@ -44,6 +44,7 @@ main{
     border-radius: 10px; /* Rounded corners for the border */
     background-color: rgba(0, 0, 0, 0.2); /* Slight dark background for contrast */
     box-shadow: 0px 0px 15px 5px #4CAF50; /* Outer glow effect */
+    width: 70%;
 }
 
 @media (max-width: 600px) {
@@ -115,6 +116,54 @@ main{
 
 
 
+.title-wrapper{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.title-btn {
+    font-size: 6rem;
+    width: 12rem;
+    height: 4rem;
+    padding: 10px 20px;
+    border: none;
+    color: #fff; /* White text */
+    background: #04b82b62; /* Dark background */
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5), /* Green glow */
+                0 0 10px rgba(0, 255, 0, 0.5), /* Green glow */
+                0 0 15px rgba(0, 255, 0, 0.5); /* Green glow */
+  }
+  
+  .title-btn:hover {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.6),
+                0 0 15px rgba(0, 255, 0, 0.6),
+                0 0 20px rgba(0, 255, 0, 0.6);
+  }
+  
+  .title-btn:focus {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.7),
+                0 0 10px rgba(0, 255, 0, 0.7),
+                0 0 15px rgba(0, 255, 0, 0.7),
+                0 0 20px rgba(0, 255, 0, 0.7);
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+
+
+
 
 
 
@@ -135,11 +184,12 @@ justify-content: center;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    font-size: 2.5rem;
 }
 
 .screen2-title {
     text-align: center;
-    font-size: 2.5rem; /* Increase font size for prominence */
+    font-size: 3rem; /* Increase font size for prominence */
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for depth */
     font-family: 'Arial', sans-serif; /* Use a modern font */
@@ -202,8 +252,8 @@ justify-content: center;
 
 .form-container{
     display: flex;
-    flex-direction: column;
-    width: 60%;
+    flex-direction: row;
+    width: 100%;
     align-items: center;
     gap: 2rem;
 }
@@ -244,3 +294,88 @@ justify-content: center;
         padding: 10px 20px; /* Smaller padding for smaller devices */
     }
 }
+
+
+.items-container{
+    
+}
+
+.output {
+    background-color: #1a1a1a48; /* Dark grey, less harsh than black */
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #333; /* Subtle border, not too bright */
+    transition: all 0.3s ease-in-out; /* Smooth transition for subtle hover effects */
+  }
+  
+  .output:hover {
+    background-color: #2a2a2a; /* Slightly lighter on hover for interactive feedback */
+  }
+  
+  .output-name {
+    color: #8cffa0; /* Muted neon green for contrast without the brightness */
+    font-size: 2rem;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
+  }
+  
+  .output-name:hover {
+    color: #a0ffa0; /* A lighter shade of green on hover for a soft glow effect */
+  }
+  
+  /* screen 3 */
+  .difficulty-box{
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8rem;
+    background-color: #00bfff28;
+    border-radius: 15px;
+  }
+
+  /* Style for difficulty buttons matching .screen2-title */
+.btn-easy, .btn-hard,.screen4-title {
+    text-align: center;
+    font-size: 3rem; /* Same font size as .screen2-title for consistency */
+    color: white; /* Text color */
+    border-color: #00BFFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+    font-family: 'Arial', sans-serif; /* Matching font family */
+    letter-spacing: 0.05em; /* Spacing out letters */
+    text-transform: uppercase; /* Uppercase text for impact */
+    padding: 1rem 2rem; /* Padding for size */
+    border: none; /* No border for a clean look */
+    background: transparent; /* Transparent background */
+    cursor: pointer; /* Cursor to pointer to indicate button */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+    border-radius: 5px; /* Slightly rounded corners */
+    animation: glow 1.5s ease-in-out infinite alternate; /* Reusing the glowing animation */
+  }
+  
+  /* Reuse the same keyframes for the glowing effect */
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px white, 0 0 20px white;
+    }
+    to {
+      text-shadow: 0 0 20px cyan, 0 0 30px cyan;
+    }
+  }
+  
+  /* Hover effect for buttons, can be customized as needed */
+  .btn-easy:hover, .btn-hard:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slight background on hover for effect */
+    color: cyan; /* Change text color on hover for a neon look */
+  }
+  
+
+ /* SCREEN 4 */
+
+ .flag_country{
+    background-color: red;
+ }
