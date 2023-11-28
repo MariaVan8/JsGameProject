@@ -376,6 +376,18 @@ justify-content: center;
 
  /* SCREEN 4 */
 
- .flag_country{
-    background-color: red;
+ .country-text{
+    font-size: 2rem;
+    color: white;
+ }
+
+ .flag-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+
+ .flag{
+    width: 12rem;
+    height: 12rem;
  }
