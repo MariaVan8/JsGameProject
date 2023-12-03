@@ -27,6 +27,7 @@ const game = {
 title:"Matching game",
 isRunning :true,
 players:[],
+currentPayer:"",
 currentDifficulty:"",
 startGameButton: document.querySelector('.start-game'),
 playBtn: document.querySelector('.title-btn'),
@@ -86,20 +87,26 @@ console.log(game.players)
 // Add click event listener to the play button
     this.playBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        this.displayDifficulty()
+
+          //Call the displayPlayers method to update the display
+        
+        //Switch the game to screen three
+        this.screenTwo.style.display = 'none';
+        this.screenThree.style.display = 'block';
+    
+         // Set up the difficulty buttons
+         this.setupDifficultyButtons();
+         
+         //Switch no text screen 4
+         if (this.playBtn.textContent === "PLAY") {
+                console.log("test")
+                game.screenThree.style.display = 'none';
+                game.screenFour.style.display = 'block';
+            }
+        
     });
   },
 
- // Method to switch the game to screen three
- displayDifficulty: function() {
-    this.screenTwo.style.display = 'none';
-    this.screenThree.style.display = 'block';
-
-     // Set up the difficulty buttons
-     this.setupDifficultyButtons();
-
-  }, 
-  
    // Method to set up the difficulty buttons
    setupDifficultyButtons: function() {
     // Set up the 'Easy' button
@@ -116,6 +123,8 @@ console.log(game.players)
     // Method to set the play button and difficulty level
     setPlayButton: function(difficulty) {
         this.playBtn.textContent = "PLAY";
+        console.log("button changes to PLAY")
+        this.playBtn.style.color = 'yellow';
         this.currentDifficulty = difficulty; // Store the chosen difficulty
       },
 
@@ -282,42 +291,13 @@ document.addEventListener('DOMContentLoaded', function (){
             //If the game has atleast one player then we can start playing
            if(game.players.length){
             game.setupGameStart(); //Will take you to the third screen
-            
+            game.initGame(countryData)
            }
     });
 
     
-    //  // Set up the play button with a single event listener
-    //  game.playBtn.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     // Only proceed if the textContent is 'PLAY'
-    //     if (game.playBtn.textContent === "PLAY") {
-    //         console.log("test")
-    //         game.screenThree.style.display = 'none';
-    //        game.screenFour.style.display = 'block';
-    //     }
-    //   });
 
-    game.playBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log("Button clicked, textContent:", game.playBtn.textContent); // Log the text content to confirm it's "PLAY"
-      
-        // Only proceed if the textContent is 'PLAY'
-        if (game.playBtn.textContent === "PLAY") {
-          console.log("Condition met, attempting to hide screenThree and show screenFour");
-      
-          // Confirm the elements are correctly referenced
-          console.log("screenThree:", game.screenThree);
-          console.log("screenFour:", game.screenFour);
-      
-          game.screenThree.style.display = 'none';
-          game.screenFour.style.display = 'block';
-      
-          // Log the display properties after setting them
-          console.log("After setting display: screenThree:", game.screenThree.style.display);
-          console.log("After setting display: screenFour:", game.screenFour.style.display);
-        }
-      });
+    
       
 
 });
