@@ -4,6 +4,7 @@ body{
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 
 }
 
@@ -24,11 +25,38 @@ body{
 
 /* MAIN */
 
-main{
+/* main{
     display: flex;
     justify-content: center;
     flex-direction: column;
+   
+} */
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative; /* Set position relative for pseudo-element positioning */
 }
+
+main::before {
+    content: ''; /* Necessary for the pseudo-element to be generated */
+    display: block; /* Makes the pseudo-element behave like a block-level element */
+    position: absolute; /* Positions the pseudo-element absolutely within the main element */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Replace RGB values with your color and opacity */
+    z-index: -1; /* Ensures the background is behind the content */
+}
+
+/* Content within main will need to be positioned relatively with a higher z-index if it's not already positioned */
+main > * {
+    position: relative;
+    z-index: 1;
+}
+
 
 /* title */
 
@@ -62,8 +90,8 @@ main{
    align-self: center;
    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);  /* Shadow for floating effect */
    border-radius: 15px;                         /* Smooth rounded corners */
-   padding: 20px;                               /* Inner space */
-   margin-top: 30px;   
+   /* padding: 20px;                               Inner space
+   margin-top: 10px;    */
 }
 /* Neon blue style enhancements for the player label and input field */
 .playerLabel,
@@ -344,11 +372,13 @@ justify-content: center;
     font-size: 3rem; /* Same font size as .screen2-title for consistency */
     color: white; /* Text color */
     border-color: #00BFFF;
+    padding: 0px;
+    margin: 0px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
     font-family: 'Arial', sans-serif; /* Matching font family */
     letter-spacing: 0.05em; /* Spacing out letters */
     text-transform: uppercase; /* Uppercase text for impact */
-    padding: 1rem 2rem; /* Padding for size */
+    padding: 0rem 2rem; /* Padding for size */
     border: none; /* No border for a clean look */
     background: transparent; /* Transparent background */
     cursor: pointer; /* Cursor to pointer to indicate button */
@@ -377,25 +407,41 @@ justify-content: center;
  /* SCREEN 4 */
 
 
- /* .country-text{
-    font-size: 2rem;
-    color: white;
-    list-style-type: none;
- }
-
- .flag-container{
+.player-info-container{
     display: flex;
-    flex-direction: column;
-    align-items: center;
- }
+    background-color: rgba(194, 138, 138, 0.26);
+    /* justify-content: space-between; */
+    height: 10rem;
+    gap: 10px;
+    padding: 0px;
+    margin: 0px;
+} 
 
- .flag{
-    width: 12rem;
-    height: 12rem;
- } */
+.player-name{
+    color: rgb(197, 44, 69);
+    background-color: #000;
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 0px;
+    margin: 10px;
+}
 
- /* SCREEN 4 */
+.player-score{
+    color: rgb(197, 44, 69);
+    background-color: #000;
+    font-weight: bold;
+    font-size: 2rem;
+    width: 45px;
+    text-align: center;
+    padding: 0px;
+    margin: 10px;
+}
 
+.game-over-message{
+    color: red;
+    font-size: 3rem;
+    font-weight: 800;
+}
 .country-text {
     font-size: 2rem; /* Sizeable font for legibility */
     color: white; /* White text for contrast */
@@ -433,4 +479,7 @@ justify-content: center;
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.5), /* Subtle glow to lift the flag off the page */
                 0 0 12px rgba(255, 255, 255, 0.5);
   }
+
+
+
   
