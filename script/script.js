@@ -2,6 +2,11 @@
 
 
 let isRunning=false;
+let currentSelections = {
+    country: null,
+    capital: null
+  };
+  
 
 
 let playerID = 0;
@@ -86,6 +91,8 @@ btnEasy:document.querySelector('.btn-easy'),
 btnHard:document.querySelector('.btn-hard'),
 playerNameDisplay: document.querySelector('.name'),
 output: document.querySelector('.output'),
+countriesList: document.querySelector('countries_list'),
+capitalsList: document.querySelector('capitals_list'),
 flagWrapper: document.querySelector('.flag-container'),
   
 // Example of adding a new player
@@ -227,7 +234,7 @@ displayPlayers: function(targetScreen) {
 initGame: function(countryData) {
     console.log('start game')
 this.clearOptions();
-this.displayNextFlag(countryData);
+// this.displayNextFlag(countryData);
 },
 // Method to clear previous options and messages
  clearOptions: function() {
@@ -250,54 +257,124 @@ for (let i = array.length -1; i>0; i--){
 }
 },
 
+
 displayOptions: function(countryData) {
     let correctOption = this.shuffleCountries(countryData);
-    let options = new Set([correctOption.country]); // Start with the correct option
+    let optionsSet = new Set();
+    
+    // Add the correct option in the format needed
+    if (this.currentDifficulty === 'HARD') {
+        optionsSet.add(`${correctOption.country} - ${correctOption.capital}`);
+    } else {
+        optionsSet.add(correctOption.country);
+    }
 
     // Add wrong options
-    while (options.size < 4) {
-      let wrongOption = this.shuffleCountries(countryData);
-      if (wrongOption.country !== correctOption.country) {
-        options.add(wrongOption.country);
-      }
+    while (optionsSet.size < 4) {
+        let wrongOption = this.shuffleCountries(countryData);
+        if (this.currentDifficulty === 'HARD') {
+            // In HARD mode, ensure not to add the correct capital with a wrong country or vice versa
+            if (wrongOption.country !== correctOption.country && wrongOption.capital !== correctOption.capital) {
+                optionsSet.add(`${wrongOption.country} - ${wrongOption.capital}`);
+            }
+        } else {
+            if (wrongOption.country !== correctOption.country) {
+                optionsSet.add(wrongOption.country);
+            }
+        }
     }
 
     // Convert the Set to an array and shuffle it to randomize the order of options
-    let optionsArray = [...options];
-    this.shuffleArray(optionsArray); // Assuming you have a shuffleArray method defined
+    let optionsArray = [...optionsSet];
+    console.log('BEFORE SHUFFLE',optionsArray)
+    this.shuffleArray(optionsArray);
+    console.log('AFTER SHUFFLE',optionsArray)
     return optionsArray;
-  },
+},
+
 
 // Method to display the next flag and options
 displayNextFlag: function(countryData) {
 let options = this.displayOptions(countryData);
+console.log(options)
 let correctOption = options[Math.floor(Math.random() * options.length)];
-let correctCountryData = countryData.find(country => country.country === correctOption);
+
+// If HARD mode, split the option to extract just the country name
+let countryName = this.currentDifficulty === 'HARD' ? correctOption.split(' - ')[0] : correctOption;
+
+// Find the correct country data based on the country name
+let correctCountryData = countryData.find(country => country.country === countryName);
+
+//let correctCountryData = countryData.find(country => country.country === correctOption);
+console.log("CORRECT COUNTRY DATA",correctCountryData)
 
 this.displayFlag(correctCountryData);
-
-  // If the difficulty is HARD, add the country name and capital to the display
-  if (this.currentDifficulty === 'HARD') {
-    // Call a method to display additional information (country and capital)
-    this.displayAdditionalInfo(correctCountryData);
-}
-
 this.displayOptionButtons(options, correctCountryData);
 },
 
 
 // Method to display option buttons
+// Method to display option buttons
 displayOptionButtons: function(options, correctCountryData) {
-options.forEach(option => {
-  const optionElement = document.createElement('li');
-  optionElement.textContent = option;
-  optionElement.classList.add('country-text');
+    // Create main containers for countries and capitals
+    const mainCountryContainer = document.createElement('div');
+    mainCountryContainer.classList.add('main-country-container');
+    
+    const mainCapitalContainer = document.createElement('div');
+    mainCapitalContainer.classList.add('main-capital-container');
 
-  optionElement.addEventListener('click', () => {
-  this.guessOutput(option, correctCountryData);
-  });
-  this.flagWrapper.appendChild(optionElement);
-  });
+    // Loop through each option and create elements for country and capital
+    options.forEach(option => {
+        let country, capital;
+        [country, capital] = option.split(' - ');
+
+        // Create country element and add to mainCountryContainer
+        const countryElement = document.createElement('div');
+        countryElement.textContent = country;
+        countryElement.classList.add('country-box');
+        countryElement.addEventListener('click', () => {
+            currentSelections.country = country; // Set the current country selection
+            this.checkAndEvaluateGuess(correctCountryData); // Check if both selections are made
+        });
+        mainCountryContainer.appendChild(countryElement);
+
+        // Create capital element and add to mainCapitalContainer if difficulty is HARD
+        if (this.currentDifficulty === 'HARD') {
+            const capitalElement = document.createElement('div');
+            capitalElement.textContent = capital;
+            capitalElement.classList.add('capital-box');
+            capitalElement.addEventListener('click', () => {
+                currentSelections.capital = capital; // Set the current capital selection
+                this.checkAndEvaluateGuess(correctCountryData); // Check if both selections are made
+            });
+            mainCapitalContainer.appendChild(capitalElement);
+        }
+    });
+
+    // Create a wrapper for both country and capital containers
+    const optionsWrapper = document.createElement('div');
+    optionsWrapper.classList.add('options-wrapper');
+    
+    // Append the main country and capital containers to the options wrapper
+    optionsWrapper.appendChild(mainCountryContainer);
+    if (this.currentDifficulty === 'HARD') {
+        optionsWrapper.appendChild(mainCapitalContainer);
+    }
+
+    // Append the options wrapper to the flag wrapper
+    this.flagWrapper.appendChild(optionsWrapper);
+},
+
+checkAndEvaluateGuess: function(correctCountryData) {
+    // Check if both country and capital have been selected in HARD mode
+    if (this.currentDifficulty === 'HARD' && currentSelections.country && currentSelections.capital) {
+        this.guessOutput(currentSelections.country, currentSelections.capital, correctCountryData);
+        currentSelections = { country: null, capital: null }; // Reset the selections for the next guess
+    } else if (this.currentDifficulty === 'EASY' && currentSelections.country) {
+        // In EASY mode, check only the country
+        this.guessOutput(currentSelections.country, null, correctCountryData);
+        currentSelections.country = null; // Reset the country selection for the next guess
+    }
 },
 
 
@@ -315,28 +392,40 @@ this.flagWrapper.appendChild(flagImage);
 },
 
 // Method to handle guesses and output results
-guessOutput: function(option, correctCountryData) {
-this.clearOptions(); // Clear previous options and messages
-let currentPlayer = this.getCurrentPlayer();
-const guess = document.createElement('p');
-if (option === correctCountryData.country) {
-    guess.style.color = 'green';
-    guess.textContent = "CORRECT";
-   currentPlayer.increaseScore(1); 
-    console.log(currentPlayer);
-} else {
-    guess.style.color = 'red';
-    guess.textContent = "WRONG";
-    currentPlayer.decreaseLives(1); // Subtract a life here
-    console.log(currentPlayer);
-}
-this.flagWrapper.appendChild(guess);
+guessOutput: function(country, capital, correctCountryData) {
+    this.clearOptions(); // Clear previous options and messages
+    let currentPlayer = this.getCurrentPlayer();
+    const guess = document.createElement('p');
+    
+    // Check if the guess is correct based on the difficulty
+    let isCorrect = false;
+    if (this.currentDifficulty === 'EASY') {
+        isCorrect = country === correctCountryData.country;
+    } else if (this.currentDifficulty === 'HARD') {
+        isCorrect = country === correctCountryData.country && capital === correctCountryData.capital;
+    }
 
-// Move to the next flag after a short delay
-setTimeout(() => {
-    this.displayNextFlag(countryData);
-}, 500);
+    // Update guess result based on whether it's correct
+    if (isCorrect) {
+        guess.style.color = 'green';
+        guess.textContent = "CORRECT";
+        currentPlayer.increaseScore(1);
+    } else {
+        guess.style.color = 'red';
+        guess.textContent = "WRONG";
+        currentPlayer.decreaseLives(1);
+    }
+    
+    this.flagWrapper.appendChild(guess);
+    console.log(currentPlayer);
+
+    // Move to the next flag after a short delay
+    setTimeout(() => {
+        this.displayNextFlag(countryData);
+    }, 500);
 },
+
+
 
 // Method to update the current player's score
 updatePlayerScore: function(score) {
@@ -391,7 +480,15 @@ document.addEventListener('DOMContentLoaded', function (){
             game.setupGameStart(); //Will take you to the third screen
             game.initGame(countryData)
            }
+          
     });
+
+    game.playBtn.addEventListener('click', function(){
+        if (this.textContent === 'PLAY'){
+            console.log("surprise!!!!")
+            game.displayNextFlag(countryData)
+        }
+    })
 
     
 

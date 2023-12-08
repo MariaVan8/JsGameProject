@@ -31,6 +31,21 @@ body{
     flex-direction: column;
    
 } */
+.country-box{
+    color: white;
+    font-size: 2rem;
+}
+.capital-box{
+    color: purple;
+    font-size: 2rem;
+}
+.options-wrapper{
+    display: flex;
+}
+.main-capital-container{
+    display: flex;
+    flex-direction: column-reverse;
+}
 
 main {
     display: flex;
