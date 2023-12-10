@@ -218,6 +218,8 @@ display: flex;
 justify-content: center;
 }
 
+
+
 /* screen 2 */
 .hide {
     display: none;
@@ -296,7 +298,7 @@ justify-content: center;
 .form-container{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    justify-content: center;
     align-items: center;
     gap: 2rem;
 }
@@ -339,9 +341,7 @@ justify-content: center;
 }
 
 
-.items-container{
-    
-}
+
 
 .output {
     background-color: #1a1a1a48; /* Dark grey, less harsh than black */
@@ -421,63 +421,79 @@ justify-content: center;
 
  /* SCREEN 4 */
 
+ .player-name {
+    color: #F8F8F2; /* Light color for readability */
+    font-size: 1.8rem; /* Increased font size for visibility */
+    text-shadow: 2px 2px 4px #000000; /* Text shadow for a glowing effect */
+    margin-bottom: 0.5rem; /* Adjusted margin bottom for spacing */
+    text-align: center; /* Center align the text */
+  }
+  
+  .player-score {
+    background-color: #6272A4; /* A soft dark background color */
+    color: #FF79C6; /* A pink color that matches the theme */
+    font-size: 1.8rem; /* Large font size for easy readability */
+    padding: 10px 20px; /* Increased padding for a balanced spacing */
+    border-radius: 20px; /* More pronounced rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Enhanced shadow for depth */
+    display: inline-block; /* Allows block level properties */
+    margin: 0.5rem; /* Adjusted margin for spacing */
+    text-align: center; /* Center align the text */
+  }
+  
+  .player-lives{
+    width: 40px; /* Set a fixed width for hearts */
+  height: auto; /* Keep the aspect ratio of the hearts */
+  margin: 0 5px; /* Space out the hearts */
+  }
 
-.player-info-container{
-    display: flex;
-    background-color: rgba(194, 138, 138, 0.26);
-    /* justify-content: space-between; */
-    height: 10rem;
-    gap: 10px;
-    padding: 0px;
-    margin: 0px;
-} 
+  .player-info-container {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    border-radius: 15px; /* Rounded corners for the container */
+    padding: 20px; /* Increased padding inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Outer shadow for depth */
+    margin: 1rem; /* Margin around the container */
+    width: auto; /* Adjust width as per content */
+    display: flex; /* Use flex layout to organize children */
+    flex-direction: row; /* Stack children vertically */
+    align-items: center; /* Center-align children horizontally */
+    justify-content: center; /* Center-align children vertically */
+    gap: 10px; /* Space between children */
+  }
+  
 
-.player-name{
-    color: rgb(197, 44, 69);
-    background-color: #000;
-    font-weight: bold;
-    font-size: 2rem;
-    padding: 0px;
-    margin: 10px;
+.switch-player-btn{
+    background-color: #ff4081; /* Pink color for attractiveness */
+    color: white; /* White text for contrast */
+    border: none; /* No border for a modern look */
+    padding: 10px 20px; /* Padding for spacing */
+    font-size: 1rem; /* Reasonable text size */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: background-color 0.3s, transform 0.3s; /* Transition for smooth effect on hover */
+    cursor: pointer; /* Cursor to pointer to indicate it's clickable */
+    margin: 10px; /* Margin for spacing around the button */
+    display: inline-block; /* To allow margins to take effect */
+    font-weight: bold; /* Bold font for emphasis */
 }
 
-.player-score{
-    color: rgb(197, 44, 69);
-    background-color: #000;
-    font-weight: bold;
-    font-size: 2rem;
-    width: 45px;
-    text-align: center;
-    padding: 0px;
-    margin: 10px;
-}
+.switch-player-btn:hover {
+    background-color: #e91e63; /* Darker shade of pink for hover effect */
+    transform: translateY(-2px); /* Slight raise to indicate button press */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Larger shadow for hover effect */
+  }
+  
+  .switch-player-btn:active {
+    transform: translateY(1px); /* Push down effect when active */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Smaller shadow for push effect */
+  }
 
 .game-over-message{
     color: red;
     font-size: 3rem;
     font-weight: 800;
 }
-.country-text {
-    font-size: 2rem; /* Sizeable font for legibility */
-    color: white; /* White text for contrast */
-    list-style-type: none; /* Remove list styles */
-    padding: 0.5rem 2rem; /* Padding for a button-like appearance */
-    margin: 0.5rem 0; /* Margin for spacing between buttons */
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    border-radius: 5px; /* Rounded corners for a modern look */
-    box-shadow: 0 0 5px rgba(0, 255, 255, 0.7), /* Neon glow effect */
-                0 0 10px rgba(0, 255, 255, 0.7),
-                0 0 15px rgba(0, 255, 255, 0.7);
-    cursor: pointer; /* Indicates the element is clickable */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  }
-  
-  .country-text:hover {
-    background-color: rgba(0, 255, 255, 0.2); /* Change background color on hover for interactivity */
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8), /* Increase glow effect on hover */
-                0 0 20px rgba(0, 255, 255, 0.8),
-                0 0 30px rgba(0, 255, 255, 0.8);
-  }
+
   
   .flag-container {
     display: flex;
@@ -496,5 +512,57 @@ justify-content: center;
   }
 
 
+/* Styling for the options container */
+.options-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Add space between each option */
+}
+
+/* Styling for individual option boxes */
+.country-box, .capital-box {
+  background-color: #44475a; /* Dark background for contrast */
+  color: #f8f8f2; /* Light text for readability */
+  border-radius: 10px; /* Rounded corners for style */
+  padding: 10px 20px; /* Padding for spacing inside the box */
+  margin: 5px 0; /* Margin for spacing between boxes */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  cursor: pointer; /* Indicate that the box is clickable */
+  transition: background-color 0.2s, transform 0.1s; /* Smooth transitions for interaction */
+  text-align: center; /* Center the text inside the box */
+  font-weight: bold; /* Make the text bold */
+}
+
+/* Effect on hover */
+.country-box:hover, .capital-box:hover {
+  background-color: #6272a4; /* Lighten the box background on hover */
+  transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+/* Effect when active/clicked */
+.country-box:active, .capital-box:active {
+  transform: translateY(1px); /* Slight press down effect when clicked */
+}
+
+/* If you want the capitals to display beneath the countries in a column, ensure the container is set to column layout */
+.main-country-container, .main-capital-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* If you want to separate the countries and capitals more distinctly */
+.main-capital-container {
+  margin-top: 20px; /* Add some space above the capitals container */
+  flex-direction: column-reverse;
+}
+
+/* Styling for the selected option */
+.selected-option {
+    background-color: #50fa7b; /* Bright color for the selected option */
+    color: #282a36; /* Dark text for contrast on the bright background */
+  }
+  
 
   

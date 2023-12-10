@@ -77,6 +77,10 @@ const game = {
 title:"Matching game",
 isRunning :true,
 players:[],
+currentSelections: {
+    country: null,
+    capital: null
+  },
 currentPlayerIndex:0,
 isMultiplayer: false,
 currentDifficulty:'EASY', //Easy default
@@ -129,6 +133,16 @@ displayPlayers: function(targetScreen) {
   if (outputContainer) {
       outputContainer.innerHTML = ''; // Clear the container
 
+        // If it's a multiplayer game, add the "Switch Player" button
+    if(this.players.length > 1) {
+        this.isMultiplayer = true;
+        const switchBtn = document.createElement('button');
+        switchBtn.textContent = 'Switch Player';
+        switchBtn.classList.add('switch-player-btn');
+        switchBtn.addEventListener('click', this.nextPlayer.bind(this)); 
+        outputContainer.appendChild(switchBtn);
+      }
+
       this.players.forEach(player => {
           let newPlayerDiv = document.createElement('div');
           newPlayerDiv.classList.add('player-info');
@@ -170,6 +184,7 @@ displayPlayers: function(targetScreen) {
 
           outputContainer.appendChild(newPlayerDiv);
       });
+
   }
 },
 
@@ -204,6 +219,7 @@ displayPlayers: function(targetScreen) {
         
     });
   },
+
 
    // Method to set up the difficulty buttons
    setupDifficultyButtons: function() {
@@ -313,7 +329,7 @@ this.displayOptionButtons(options, correctCountryData);
 },
 
 
-// Method to display option buttons
+
 // Method to display option buttons
 displayOptionButtons: function(options, correctCountryData) {
     // Create main containers for countries and capitals
@@ -333,8 +349,8 @@ displayOptionButtons: function(options, correctCountryData) {
         countryElement.textContent = country;
         countryElement.classList.add('country-box');
         countryElement.addEventListener('click', () => {
-            currentSelections.country = country; // Set the current country selection
-            this.checkAndEvaluateGuess(correctCountryData); // Check if both selections are made
+            game.currentSelections.country = country; // Set the current country selection
+            game.checkAndEvaluateGuess(correctCountryData); // Check if both selections are made
         });
         mainCountryContainer.appendChild(countryElement);
 
@@ -344,8 +360,8 @@ displayOptionButtons: function(options, correctCountryData) {
             capitalElement.textContent = capital;
             capitalElement.classList.add('capital-box');
             capitalElement.addEventListener('click', () => {
-                currentSelections.capital = capital; // Set the current capital selection
-                this.checkAndEvaluateGuess(correctCountryData); // Check if both selections are made
+                game.currentSelections.capital = capital; // Set the current capital selection
+                game.checkAndEvaluateGuess(correctCountryData); // Check if both selections are made
             });
             mainCapitalContainer.appendChild(capitalElement);
         }
@@ -366,16 +382,16 @@ displayOptionButtons: function(options, correctCountryData) {
 },
 
 checkAndEvaluateGuess: function(correctCountryData) {
-    // Check if both country and capital have been selected in HARD mode
-    if (this.currentDifficulty === 'HARD' && currentSelections.country && currentSelections.capital) {
-        this.guessOutput(currentSelections.country, currentSelections.capital, correctCountryData);
-        currentSelections = { country: null, capital: null }; // Reset the selections for the next guess
-    } else if (this.currentDifficulty === 'EASY' && currentSelections.country) {
-        // In EASY mode, check only the country
-        this.guessOutput(currentSelections.country, null, correctCountryData);
-        currentSelections.country = null; // Reset the country selection for the next guess
+    // Use `this.currentSelections` to access the selections
+    if (this.currentDifficulty === 'HARD' && this.currentSelections.country && this.currentSelections.capital) {
+      this.guessOutput(this.currentSelections.country, this.currentSelections.capital, correctCountryData);
+      this.currentSelections = { country: null, capital: null }; // Reset the selections for the next guess
+    } else if (this.currentDifficulty === 'EASY' && this.currentSelections.country) {
+      // In EASY mode, check only the country
+      this.guessOutput(this.currentSelections.country, null, correctCountryData);
+      this.currentSelections.country = null; // Reset the country selection for the next guess
     }
-},
+  },
 
 
 
@@ -437,6 +453,7 @@ updatePlayerScore: function(score) {
 };
 
 
+
 document.addEventListener('DOMContentLoaded', function (){
 
     //Variables
@@ -491,6 +508,21 @@ document.addEventListener('DOMContentLoaded', function (){
     })
 
     
+    $(document).ready(function(){
+       
+        $('.help-button').on('click', function(){
+            $('#helpModal').modal('show');
+        });
+        $('#moreInfo').on('click', function(){
+            $('#info').modal('show')
+        })
+    
+        $('#close').on('click', function(){
+            $('#info').modal('hide')
+            $('#helpModal').modal('hide');
+        });
+    
+    });
 
     
       
