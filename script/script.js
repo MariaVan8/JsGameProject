@@ -2,13 +2,6 @@
 
 
 let isRunning=false;
-let currentSelections = {
-    country: null,
-    capital: null
-  };
-  
-
-
 let playerID = 0;
 class Player {
     constructor(name,element){
@@ -59,17 +52,14 @@ decreaseLives(amount = 1) {
       }
   }
 
-  if (this.lives <= 0) {
-      console.log("GAME OVER!!!"); 
-      game.flagWrapper.style.display = 'none';
-      const gameOverMessage = document.createElement('div');
-        gameOverMessage.textContent = "Game Over!";
-        console.log(gameOverMessage)
-        gameOverMessage.classList.add('game-over-message');
-        game.screenFour.appendChild(gameOverMessage);
-
+  // When a player loses all lives
+if (this.lives <= 0) {
+    console.log("GAME OVER!!!");
+    game.endGame(); // Call endGame to determine the winner and end the game
   }
 }
+
+  
 
 }
 
@@ -81,6 +71,8 @@ currentSelections: {
     country: null,
     capital: null
   },
+currentRound: 0,
+maxRounds: 10,
 currentPlayerIndex:0,
 isMultiplayer: false,
 currentDifficulty:'EASY', //Easy default
@@ -108,11 +100,39 @@ addPlayer: function(name) {
   console.log(newPlayer);
 },
 
+// nextPlayer: function(){
+//   if(this.isMultiplayer){
+//     this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+//   }
+// },
+
 nextPlayer: function(){
-  if(this.isMultiplayer){
-    this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
-  }
-},
+    if(this.isMultiplayer){
+      this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+      // If we've looped back to the first player, the round is complete
+      if (this.currentPlayerIndex === 0) {
+        this.currentRound++;
+        if (this.currentRound >= this.maxRounds) {
+          this.endGame();
+          return;
+        }
+      }
+      this.updateUIForPlayerTurn();
+    }
+  },
+  
+  endGame: function() {
+    let winner = this.players[0];
+    for (let i = 1; i < this.players.length; i++) {
+      if (this.players[i].score > winner.score) {
+        winner = this.players[i];
+      }
+    }
+    // Display the winner and reset the game or offer to play again
+    alert(winner.name + " wins with a score of " + winner.score + "!");
+    // Reset game logic here
+  },
+
  // Method to get the current player
  getCurrentPlayer: function() {
   return this.players[this.currentPlayerIndex];
@@ -136,11 +156,9 @@ displayPlayers: function(targetScreen) {
         // If it's a multiplayer game, add the "Switch Player" button
     if(this.players.length > 1) {
         this.isMultiplayer = true;
-        const switchBtn = document.createElement('button');
-        switchBtn.textContent = 'Switch Player';
-        switchBtn.classList.add('switch-player-btn');
-        switchBtn.addEventListener('click', this.nextPlayer.bind(this)); 
-        outputContainer.appendChild(switchBtn);
+
+        this.nextPlayer.bind(this); 
+        
       }
 
       this.players.forEach(player => {
@@ -439,6 +457,16 @@ guessOutput: function(country, capital, correctCountryData) {
     setTimeout(() => {
         this.displayNextFlag(countryData);
     }, 500);
+
+    // Inside guessOutput, after handling the guess:
+setTimeout(() => {
+    if (currentPlayer.lives > 0) { // Only switch player if the current player is still in the game
+      this.nextPlayer();
+    } else {
+      // Handle the case where the current player has no lives left
+    }
+  }, 500);
+  
 },
 
 
@@ -449,6 +477,32 @@ updatePlayerScore: function(score) {
     currentPlayer.increaseScore(score);
   
 },
+
+
+endGame: function() {
+    let winner = this.players[0];
+    for (let i = 1; i < this.players.length; i++) {
+      if (this.players[i].score > winner.score) {
+        winner = this.players[i];
+      }
+    }
+    // Hide the flag wrapper and display the game over message
+    this.flagWrapper.style.display = 'none';
+    const gameOverMessage = document.createElement('div');
+
+    if(this.isMultiplayer == true){
+        gameOverMessage.textContent = winner.name + " wins with a score of " + winner.score + "!";
+        gameOverMessage.classList.add('game-over-message');
+        this.screenFour.appendChild(gameOverMessage);
+        console.log(gameOverMessage);
+    } else{
+        gameOverMessage.textContent = "GAME OVER";
+        gameOverMessage.classList.add('game-over-message');
+        this.screenFour.appendChild(gameOverMessage);
+        console.log(gameOverMessage);
+    }
+   
+  },
 
 };
 

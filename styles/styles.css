@@ -25,12 +25,7 @@ body{
 
 /* MAIN */
 
-/* main{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-   
-} */
+
 .country-box{
     color: white;
     font-size: 2rem;
@@ -462,37 +457,43 @@ justify-content: center;
   }
   
 
-.switch-player-btn{
-    background-color: #ff4081; /* Pink color for attractiveness */
-    color: white; /* White text for contrast */
-    border: none; /* No border for a modern look */
-    padding: 10px 20px; /* Padding for spacing */
-    font-size: 1rem; /* Reasonable text size */
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    transition: background-color 0.3s, transform 0.3s; /* Transition for smooth effect on hover */
-    cursor: pointer; /* Cursor to pointer to indicate it's clickable */
-    margin: 10px; /* Margin for spacing around the button */
-    display: inline-block; /* To allow margins to take effect */
-    font-weight: bold; /* Bold font for emphasis */
-}
-
-.switch-player-btn:hover {
-    background-color: #e91e63; /* Darker shade of pink for hover effect */
-    transform: translateY(-2px); /* Slight raise to indicate button press */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Larger shadow for hover effect */
+  .game-over-message {
+    color: #FF4136; /* Vivid red color for visibility */
+    font-size: 4rem; /* Larger size for impact */
+    font-weight: 700; /* Bold but not too heavy */
+    text-shadow: 2px 2px 4px #000000; /* Soft shadow for 3D effect */
+    animation: pulse 1s infinite; /* Pulse animation for attention */
+    text-align: center; /* Center align text */
+    padding: 20px; /* Add some padding around the text */
+    border-radius: 10px; /* Rounded corners */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: inline-block; /* Allows the div to size according to content */
+    margin: 20px; /* Add some margin around the element */
+    transition: transform 0.3s ease; /* Smooth transformation upon hover */
   }
   
-  .switch-player-btn:active {
-    transform: translateY(1px); /* Push down effect when active */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Smaller shadow for push effect */
+  /* Pulse keyframes for the animation */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
-
-.game-over-message{
-    color: red;
-    font-size: 3rem;
-    font-weight: 800;
-}
+  
+  /* Enlarge and reduce opacity on hover to invite user interaction */
+  .game-over-message:hover {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+  
 
   
   .flag-container {
